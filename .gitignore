@@ -1,9 +1,12 @@
+# AI Agent Context (private instructions)
+ai_context/**
+
 # Python
 __pycache__/
 *.pyc
 
 # Generated data
-data/generated/*.csv
+data/**
 
 # Environment
 .env

@@ -16,17 +16,13 @@ from utils.sampling import (
 
 def generate_users():
     """
-    Menghasilkan DataFrame pengguna sintetis.
+    Menghasilkan data pengguna fiktif untuk simulasi.
 
-    Fungsi ini membuat data pengguna dengan atribut demografis
-    seperti ID, usia, jenis kelamin, dan kota tempat tinggal.
+    Fungsi ini menciptakan profil pengguna dengan atribut dasar seperti
+    usia, jenis kelamin, dan lokasi kota secara acak namun terstruktur.
 
     Returns:
-        pd.DataFrame: DataFrame pengguna dengan kolom:
-            - user_id (str): ID unik pengguna (format: U0001, U0002, dst).
-            - age (int): Usia pengguna dalam rentang yang ditentukan.
-            - gender (str): Jenis kelamin pengguna (female/male).
-            - city (str): Kota tempat tinggal pengguna.
+        pd.DataFrame: DataFrame yang berisi daftar profil pengguna.
     """
     data = []
     for i in range(JUMLAH_USERS):
@@ -49,13 +45,10 @@ def generate_users():
 
 def simpan_users(path_output):
     """
-    Menghasilkan dan menyimpan dataset pengguna ke file CSV.
+    Menyimpan dataset pengguna ke dalam format CSV.
 
     Args:
-        path_output (str): Path file output untuk menyimpan dataset CSV.
-
-    Returns:
-        None
+        path_output (str): Lokasi penyimpanan file CSV hasil generate.
     """
     df = generate_users()
     df.to_csv(path_output, index=False)

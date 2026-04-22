@@ -1,26 +1,36 @@
-#: Jumlah interaksi yang akan dihasilkan
+import json
+import os
+
+#: Path metadata produk
+PRODUCTS_METADATA_PATH = "data/raw/products_metadata.json"
+
+def load_real_products():
+    """
+    Memuat daftar produk dari file eksternal.
+
+    Fungsi ini mengambil data produk riil dalam format JSON. Jika file 
+    tidak ditemukan, data contoh akan digunakan sebagai cadangan.
+
+    Returns:
+        list: Daftar produk riil atau data contoh.
+    """
+    if os.path.exists(PRODUCTS_METADATA_PATH):
+        with open(PRODUCTS_METADATA_PATH, "r") as f:
+            return json.load(f)
+    return [
+        {"name": "Mock Flower A", "price": 50000, "size": "small"},
+        {"name": "Mock Flower B", "price": 150000, "size": "medium"}
+    ]
+
+#: Daftar produk riil
+REAL_PRODUCTS = load_real_products()
+
+#: Konfigurasi dasar
 JUMLAH_INTERACTIONS = 8000
-
-#: Jumlah produk yang akan dihasilkan
-JUMLAH_PRODUCTS = 120
-
-#: Jumlah pengguna yang akan dihasilkan
 JUMLAH_USERS = 400
+JUMLAH_PRODUCTS = len(REAL_PRODUCTS)
 
-
-#: Distribusi tipe produk dengan bobot probabilitas
-#: Format: (nama_produk, bobot)
-PRODUCT_TYPES = [
-    ("fresh_flower", 0.25),
-    ("artificial_flower", 0.35),
-    ("money_bouquet", 0.15),
-    ("satin_bouquet", 0.15),
-    ("mixed_bouquet", 0.10),
-]
-
-
-#: Distribusi tema produk dengan bobot probabilitas
-#: Format: (nama_tema, bobot)
+#: Distribusi tema produk
 PRODUCT_THEMES = [
     ("graduation", 0.35),
     ("romantic", 0.10),
@@ -30,9 +40,7 @@ PRODUCT_THEMES = [
     ("condolence", 0.10),
 ]
 
-
-#: Distribusi jenis acara dengan bobot probabilitas
-#: Format: (nama_acara, bobot)
+#: Distribusi jenis acara
 EVENT_TYPES = [
     ("graduation", 0.35),
     ("birthday", 0.25),
@@ -41,9 +49,7 @@ EVENT_TYPES = [
     ("condolence", 0.10),
 ]
 
-
-#: Distribusi ukuran buket dengan bobot probabilitas
-#: Format: (ukuran, bobot)
+#: Distribusi ukuran buket
 BOUQUET_SIZES = [
     ("small", 0.30),
     ("medium", 0.40),
@@ -51,9 +57,7 @@ BOUQUET_SIZES = [
     ("premium", 0.10),
 ]
 
-
-#: Rentang harga berdasarkan ukuran buket dalam rupiah
-#: Format: {ukuran: (harga_min, harga_max)}
+#: Rentang harga buket
 PRICE_RANGES = {
     "small": (100000, 150000),
     "medium": (150000, 300000),
@@ -61,39 +65,24 @@ PRICE_RANGES = {
     "premium": (600000, 1000000),
 }
 
-
-#: Distribusi gender pengguna dengan bobot probabilitas
-#: Format: (gender, bobot)
+#: Distribusi gender pengguna
 GENDER_DISTRIBUTION = [
     ("female", 0.55),
     ("male", 0.45),
 ]
 
-
-#: Rentang usia pengguna (min, max)
+#: Rentang usia pengguna
 AGE_RANGE = (18, 40)
 
-
-#: Distribusi jenis interaksi dengan bobot probabilitas
-#: Format: (jenis_interaksi, bobot)
+#: Distribusi jenis interaksi
 INTERACTION_TYPES = [
     ("view", 0.7),
     ("click", 0.2),
     ("purchase", 0.1),
 ]
 
-
-#: Daftar kota yang tersedia untuk data pengguna
+#: Daftar kota tersedia
 CITIES = [
-    "Banjarnegara",
-    "Bandung",
-    "Jakarta",
-    "Surabaya",
-    "Yogyakarta",
-    "Semarang",
-    "Malang",
-    "Wonosobo",
-    "Purbalingga",
-    "Banyumas",
-    "Cilacap"
+    "Banjarnegara", "Bandung", "Jakarta", "Surabaya", "Yogyakarta",
+    "Semarang", "Malang", "Wonosobo", "Purbalingga", "Banyumas", "Cilacap"
 ]

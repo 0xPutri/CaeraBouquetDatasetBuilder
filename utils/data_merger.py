@@ -5,17 +5,16 @@ def gabungkan_dataset(products_path, users_path, interactions_path):
     """
     Menggabungkan dataset products, users, dan interactions menjadi satu DataFrame.
 
-    Fungsi ini membaca ketiga dataset CSV dan melakukan merge berdasarkan
-    user_id dan product_id untuk menghasilkan dataset yang lengkap.
+    Fungsi ini menyatukan data produk, pengguna, dan interaksi 
+    berdasarkan ID masing-masing untuk membentuk dataset yang utuh.
 
     Args:
-        products_path (str): Path ke file CSV dataset products.
-        users_path (str): Path ke file CSV dataset users.
-        interactions_path (str): Path ke file CSV dataset interactions.
+        products_path (str): Path file CSV produk.
+        users_path (str): Path file CSV pengguna.
+        interactions_path (str): Path file CSV interaksi.
 
     Returns:
-        pd.DataFrame: DataFrame hasil merge yang berisi semua informasi
-            dari interactions, users, dan products.
+        pd.DataFrame: DataFrame hasil penggabungan dataset.
     """
     products = pd.read_csv(products_path)
     users = pd.read_csv(users_path)
@@ -34,21 +33,13 @@ def simpan_training_dataset(
     interactions_path
 ):
     """
-    Menggabungkan dan menyimpan dataset training ke file CSV.
-
-    Fungsi ini menggabungkan dataset products, users, dan interactions,
-    kemudian menyimpan hasilnya sebagai file CSV untuk keperluan training.
+    Menyimpan hasil penggabungan dataset untuk keperluan pelatihan.
 
     Args:
-        products_path (str): Path ke file CSV dataset products.
-        users_path (str): Path ke file CSV dataset users.
-        interactions_path (str): Path ke file CSV dataset interactions.
-        output_path (str): Path file output untuk menyimpan dataset training.
-
-    Returns:
-        None
+        output_path (str): Lokasi penyimpanan file CSV hasil akhir.
+        products_path (str): Path file CSV produk.
+        users_path (str): Path file CSV pengguna.
+        interactions_path (str): Path file CSV interaksi.
     """
     df = gabungkan_dataset(products_path, users_path, interactions_path)
     df.to_csv(output_path, index=False)
-
-    print(f"Training dataset berhasil dibuat: {output_path}")

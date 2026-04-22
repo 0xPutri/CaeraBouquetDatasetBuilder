@@ -12,22 +12,17 @@ from utils.sampling import ambil_berdasarkan_bobot
 
 def generate_iterations(products_df, users_df):
     """
-    Menghasilkan DataFrame interaksi pengguna dengan produk.
+    Menghasilkan data interaksi antara pengguna dan produk.
 
-    Fungsi ini membuat data interaksi sintetis yang mencakup view, click,
-    dan purchase antara pengguna dan produk dalam periode waktu tertentu.
+    Fungsi ini mensimulasikan aktivitas seperti melihat, mengklik, 
+    atau membeli produk dalam rentang waktu satu tahun.
 
     Args:
-        products_df (pd.DataFrame): DataFrame produk yang berisi kolom 'product_id'.
-        users_df (pd.DataFrame): DataFrame pengguna yang berisi kolom 'user_id'.
+        products_df (pd.DataFrame): Referensi data produk.
+        users_df (pd.DataFrame): Referensi data pengguna.
 
     Returns:
-        pd.DataFrame: DataFrame interaksi dengan kolom:
-            - interaction_id (str): ID unik untuk setiap interaksi.
-            - user_id (str): ID pengguna yang melakukan interaksi.
-            - product_id (str): ID produk yang diinteraksikan.
-            - interaction_type (str): Jenis interaksi (view, click, purchase).
-            - timestamp (datetime): Waktu interaksi terjadi.
+        pd.DataFrame: DataFrame yang memuat riwayat interaksi.
     """
     data = []
 
@@ -58,15 +53,12 @@ def generate_iterations(products_df, users_df):
 
 def simpan_interactions(product_df, users_df, path_output):
     """
-    Menghasilkan dan menyimpan dataset interaksi ke file CSV.
+    Menyimpan dataset interaksi ke dalam format CSV.
 
     Args:
-        product_df (pd.DataFrame): DataFrame produk sebagai referensi.
-        users_df (pd.DataFrame): DataFrame pengguna sebagai referensi.
-        path_output (str): Path file output untuk menyimpan dataset CSV.
-
-    Returns:
-        None
+        product_df (pd.DataFrame): Data produk sebagai referensi.
+        users_df (pd.DataFrame): Data pengguna sebagai referensi.
+        path_output (str): Lokasi penyimpanan file CSV.
     """
     df = generate_iterations(product_df, users_df)
     df.to_csv(path_output, index=False)

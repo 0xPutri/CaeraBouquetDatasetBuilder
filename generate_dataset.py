@@ -1,48 +1,69 @@
 import os
+import time
+from rich.console import Console
+from rich.panel import Panel
+from rich.status import Status
+from rich.theme import Theme
 
 from generators.products import generate_products
 from generators.users import generate_users
 from generators.interactions import generate_iterations
 
+custom_theme = Theme({
+    "info": "cyan",
+    "success": "green",
+    "warning": "yellow",
+    "error": "red",
+    "dim": "grey50"
+})
+
+console = Console(theme=custom_theme)
 
 def main():
     """
-    Fungsi utama untuk menghasilkan dan menyimpan semua dataset sintetis.
+    Menjalankan alur pembuatan dataset dengan tampilan Rich CLI.
 
-    Fungsi ini akan:
-    1. Membuat direktori output jika belum ada
-    2. Menghasilkan dataset products dan menyimpannya ke CSV
-    3. Menghasilkan dataset users dan menyimpannya ke CSV
-    4. Menghasilkan dataset interactions dan menyimpannya ke CSV
-
-    Returns:
-        None
+    Proses ini mengoordinasikan pembuatan data produk, pengguna, dan
+    interaksi dengan feedback visual yang interaktif.
     """
-    print("Mulai generate dataset sintetis florist...\n")
+    os.system('cls' if os.name == 'nt' else 'clear')
+    
+    console.print(
+        Panel.fit(
+            "[bold cyan]CAERA BOUQUET[/bold cyan] | [dim]Dataset Builder Generator[/dim]",
+            border_style="cyan",
+            padding=(1, 4)
+        )
+    )
 
     output_dir = "data/generated"
     os.makedirs(output_dir, exist_ok=True)
 
-    # Generate Products
-    products_df = generate_products()
-    products_path = os.path.join(output_dir, "products.csv")
-    products_df.to_csv(products_path, index=False)
-    print(f"Products berhasil dibuat: {products_path}")
+    # 1. Products
+    with Status("[bold]Menyusun katalog produk riil...", console=console, spinner="dots") as status:
+        time.sleep(1)
+        products_df = generate_products()
+        products_path = os.path.join(output_dir, "products.csv")
+        products_df.to_csv(products_path, index=False)
+        console.print(f"[success]✔[/success] Katalog produk berhasil disiapkan [dim]({products_path})[/dim]")
 
-    # Generate Users
-    users_df = generate_users()
-    users_path = os.path.join(output_dir, "users.csv")
-    users_df.to_csv(users_path, index=False)
-    print(f"Users berhasil dibuat: {users_path}")
+    # 2. Users
+    with Status("[bold]Menciptakan profil pengguna fiktif...", console=console, spinner="dots") as status:
+        time.sleep(1)
+        users_df = generate_users()
+        users_path = os.path.join(output_dir, "users.csv")
+        users_df.to_csv(users_path, index=False)
+        console.print(f"[success]✔[/success] Profil pengguna berhasil dibuat [dim]({users_path})[/dim]")
 
-    # Generate Interactions
-    interactions_df = generate_iterations(products_df, users_df)
-    interactions_path = os.path.join(output_dir, "interactions.csv")
-    interactions_df.to_csv(interactions_path, index=False)
-    print(f"Interactions berhasil dibuat: {interactions_path}")
+    # 3. Interactions
+    with Status("[bold]Mensimulasikan aktivitas pelanggan...", console=console, spinner="dots") as status:
+        time.sleep(1)
+        interactions_df = generate_iterations(products_df, users_df)
+        interactions_path = os.path.join(output_dir, "interactions.csv")
+        interactions_df.to_csv(interactions_path, index=False)
+        console.print(f"[success]✔[/success] Simulasi interaksi selesai [dim]({interactions_path})[/dim]")
 
-    print("\nSemua dataset berhasil dibuat.")
-
+    console.print("\n[bold green]✓ Seluruh proses generator berhasil diselesaikan.[/bold green]\n")
 
 if __name__ == "__main__":
     main()
