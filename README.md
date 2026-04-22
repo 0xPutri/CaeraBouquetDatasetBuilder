@@ -1,18 +1,18 @@
 # CaeraBouquetDatasetBuilder – Florist Recommendation System
 
-Generator dataset sintetis untuk simulasi sistem rekomendasi bouquet bunga. Dataset ini digunakan untuk keperluan eksperimen Machine Learning pada proyek **Web-based Bouquet Ordering System with Recommendation Feature**.
+Generator dataset profesional untuk sistem rekomendasi bouquet bunga. Dataset ini digunakan untuk keperluan pengembangan Machine Learning pada proyek **Web-based Bouquet Ordering System with Recommendation Feature**.
 
-> Dataset yang dihasilkan meniru pola dasar e-commerce florist seperti produk bouquet, pengguna, dan interaksi pengguna terhadap produk.
+> Dataset yang dihasilkan menyelaraskan katalog produk riil dengan simulasi perilaku pengguna dan interaksi terhadap produk.
 
 ## Tujuan
 
-Repository ini dibuat untuk menghasilkan dataset sintetis yang realistis untuk kebutuhan:
+Repository ini dibuat untuk menghasilkan dataset yang akurat untuk kebutuhan:
 
 - eksperimen sistem rekomendasi
 - simulasi perilaku pengguna
 - pengembangan dan pengujian model machine learning
 
-Dataset dibuat berdasarkan distribusi probabilitas yang dapat dikonfigurasi sehingga pola data tidak sepenuhnya random.
+Dataset dibuat berdasarkan katalog produk bisnis riil dan distribusi probabilitas yang dapat dikonfigurasi sehingga pola interaksi tetap realistis.
 
 ## Struktur Project
 
@@ -35,13 +35,13 @@ Dataset dibuat berdasarkan distribusi probabilitas yang dapat dikonfigurasi sehi
 
 1. Install dependency terlebih dahulu.
    
-   ```
+   ```bash
    pip install -r requirements.txt
    ```
 
 2. Jalankan script generator:
    
-   ```
+   ```bash
    python generate_dataset.py
    ```
 
@@ -61,7 +61,7 @@ interactions.csv
 
 ## Catatan
 
-Dataset yang dihasilkan bersifat **sintetis** dan tidak merepresentasikan data bisnis nyata. Tujuan utama dataset ini adalah untuk simulasi dan pengujian sistem rekomendasi.
+Dataset ini mengintegrasikan data produk bisnis nyata. Simulasi interaksi dan pengguna dirancang untuk membantu validasi dan pengujian sistem rekomendasi agar sesuai dengan kondisi operasional di lapangan.
 
 ## Lisensi
 
